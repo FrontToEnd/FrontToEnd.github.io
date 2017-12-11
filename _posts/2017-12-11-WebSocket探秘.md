@@ -28,7 +28,7 @@ HTTP是应用层协议，封装解析传输的数据。从HTTP1.1开始其实就
 **WebSocket**：
 WebSocket是包装成了一个应用层协议作为socket,从而能够让客户端和远程服务端通过web建立全双工通信。websocket提供ws和wss两种URL方案。
 
-###WebSocket API
+### WebSocket API
 
 -------
 接下来我们再来看看`WebSocket`的API。首先我们需要做的就是创建一个实例：
