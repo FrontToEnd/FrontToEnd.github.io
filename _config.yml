@@ -19,9 +19,9 @@ sidebar-avatar: /img/about-BY-gentle.jpg      # use absolute URL, seeing it's us
 # SNS settings
 RSS: false
 
-zhihu_username:     fronttoend
+# zhihu_username:     fronttoend
 github_username:    fronttoend
-facebook_username:  chuck_qu
+# facebook_username:  chuck_qu
 jianshu_username:   1abd715aa3d4
 
 
