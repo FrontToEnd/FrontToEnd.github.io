@@ -2,7 +2,7 @@
 layout:     post                   
 title:      substr和substring的用法和区别            
 subtitle:   容易混淆的两个方法
-date:       2017-12-14
+date:       2017-12-13
 author:     chuck
 header-img: img/home-bg-blog.jpg
 catalog: true                      
