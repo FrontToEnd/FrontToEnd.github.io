@@ -41,6 +41,12 @@ Linux 的拥护者感到很伤心，因为他们开发了 Konqueror，它使用�
 
 `user-agent` 字符串变得越来越复杂，也越来越让人摸不着头脑，只因为各个浏览器在争相“佯装”对方。
 
+最后来看一下我正在使用的Chrome的`user-agent`:
+
+```
+window.navigator.userAgent; // "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.108 Safari/537.36"
+```
+
 转载自：**前端之巅**
 
 原文链接：[浏览器user-agent简史](http://mp.weixin.qq.com/s/pMpKDXFm_tgWpU3geeUMFg)
