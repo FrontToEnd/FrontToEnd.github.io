@@ -4,7 +4,7 @@ title:      JavaScript高级程序设计读书笔记(一)
 subtitle:   重温红皮书精髓
 date:       2017-12-22
 author:     chuck
-header-img: img/home-bg-lazy.jpg
+header-img: img/home-bg-basic.jpg
 catalog: true                      
 tags:                               
     - JavaScript
