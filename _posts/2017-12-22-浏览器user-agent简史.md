@@ -42,6 +42,7 @@ Linux 的拥护者感到很伤心，因为他们开发了 Konqueror，它使用�
 `user-agent` 字符串变得越来越复杂，也越来越让人摸不着头脑，只因为各个浏览器在争相“佯装”对方。
 
 转载自：**前端之巅**
+
 原文链接：[浏览器user-agent简史](http://mp.weixin.qq.com/s/pMpKDXFm_tgWpU3geeUMFg)
 
 
