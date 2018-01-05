@@ -93,5 +93,64 @@ _.throttle = function(func,wait,options) {
 };
 ```
 
+#### 函数防抖
+
+
+```
+// 设置wait表示连续事件结束后指定毫秒数后触发
+// immediate为true表示连续事件结束后立即触发，忽略第二参数wait
+_.debounce = function(func,wait,immediate) {
+    var timeout,args,context,timestamp,result;
+    
+    var later = function() {
+            // 当last大于等于wait时，就会执行func
+            var last = _.now() - timestamp;
+            
+            // 如果间隔还没到wait毫秒数进入分支
+            if (last < wait && last >=0) {
+                // 继续延迟wait - last毫秒后执行
+                timeout = setTimeout(later,wait - last);          
+            } else {
+                timeout = null;
+                if (!immediate) {
+                    result = func.apply(context,args);
+                    if (!timeout)
+                    //清除引用
+                    context = args = null;
+                }
+            }
+    };
+    
+    // 闭包返回的函数
+    return function() {
+        
+        //指定this指向
+        context = this;
+        args = arguments;
+        
+        // 每次触发函数时，更新时间戳，该变量在later方法中有用到
+        timestamp = _.now();
+        
+        // 如果callNow为true，则表示立即触发
+        // immediate为传入的参数，如果为true，则表示想要立即触发
+        // 如果去掉!timeout的条件，则会每次调用函数都会立即触发
+        // 如果timeout为null，则表示第一次触发，所以callNow为true代表着第一次立即触发
+        var callNow = immediate && !timeout;
+        
+        // wait毫秒数之后触发later方法
+        if (!timeout)
+        timeout = setTimeout(later,wait);
+        
+        //如果是立即调用，则调用传入的函数，并且解除引用
+        if (callNow) {
+            result = func.apply(context,args);
+            context = args = null;
+        }
+        
+        return result;
+    };
+};
+```
+
 
 
