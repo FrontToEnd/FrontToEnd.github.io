@@ -1,16 +1,14 @@
 ---
 layout:     post                   
-title:      underscore经典方法解析    
-subtitle:   学习一下优秀的函数处理方式
-date:       2018-01-05
+title:      underscore经典方法解析        
+subtitle:   学习优秀的函数处理方式
+date:       2018-01-05
 author:     chuck
 header-img: img/home-bg-basic.jpg
 catalog: true                      
 tags:                               
+    - JavaScript
     - underscore
-    -源码分析
-    -函数节流
-    -函数防抖
 ---
 
 
