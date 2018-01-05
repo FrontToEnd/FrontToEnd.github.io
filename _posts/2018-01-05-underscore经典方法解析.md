@@ -1,4 +1,3 @@
-
 ---
 layout:     post                   
 title:      underscore经典方法解析    
