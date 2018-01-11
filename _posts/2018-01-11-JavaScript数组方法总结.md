@@ -4,7 +4,7 @@ title:      JavaScript数组方法总结
 subtitle:   数组的方法确实很多
 date:       2018-01-11
 author:     chuck
-header-img: img/home-project-theme.jpg
+header-img: img/home-bg-array.jpg
 catalog: true                      
 tags:                               
     - JavaScript
