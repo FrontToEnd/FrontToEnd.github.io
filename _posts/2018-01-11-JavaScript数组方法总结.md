@@ -700,8 +700,8 @@ Array(3).fill(4);            // [4, 4, 4]
 ```
 let numbers = [25,30,35,40,45];
 
-console.log(numbers.find(n = n > 33));  // 35
-console.log(numbers.findIndex(n = n > 33));  // 2
+console.log(numbers.find(n => n > 33));  // 35
+console.log(numbers.findIndex(n => n > 33));  // 2
 ```
 
 -------
