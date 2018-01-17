@@ -507,7 +507,324 @@ const pull = (arr, ...args) => {
 ```
 目的：改变原始数组以过滤出指定的值。会改变原数组。
 
+解析：首先判断剩余参数组成的数组`args`的第一项是否为数组，如果是，那么就取用第一项，如果不是数组，就取用`args`这个数组。通过`filter()`和`includes()`过滤出`arr`中参数未指定的所有项组成的数组`pulled`，重写`arr`数组通过遍历将`pulled`中元素赋值与`arr`。
 
-未完待续
+需要注意的是，`args`是数组。
+
+
+```
+let myArray = ['a', 'b', 'c', 'a', 'b', 'c'];
+pull(myArray, 'a', 'c'); // myArray = [ 'b', 'b' ]
+```
+
+#### pullAtIndex
+
+
+```
+const pullAtIndex = (arr, pullArr) => {
+  let removed = [];
+  let pulled = arr
+    .map((v, i) => (pullArr.includes(i) ? removed.push(v) : v))
+    .filter((v, i) => !pullArr.includes(i));
+  arr.length = 0;
+  pulled.forEach(v => arr.push(v));
+  return removed;
+};
+```
+目的：改变原始数组过滤出指定索引的值。会改变原数组。
+
+解析：与`pull`很相近，不同的是，该方法会将指定索引对应的值使用新数组返回。
+
+
+```
+let myArray = ['a', 'b', 'c', 'd'];
+let pulled = pullAtIndex(myArray, [1, 3]); // myArray = [ 'a', 'c' ] , pulled = [ 'b', 'd' ]
+```
+
+#### reducedFilter
+
+
+```
+const reducedFilter = (data, keys, fn) =>
+  data.filter(fn).map(el =>
+    keys.reduce((acc, key) => {
+      acc[key] = el[key];
+      return acc;
+    }, {})
+  );
+```
+
+目的：根据条件过滤一个对象数组，同时过滤未指定的键。
+
+解析：使用`filter`过滤出符合fn的数组，通过遍历将指定的键与对应的值赋值到新的空对象中并返回。
+
+
+```
+const data = [
+  {
+    id: 1,
+    name: 'john',
+    age: 24
+  },
+  {
+    id: 2,
+    name: 'mike',
+    age: 50
+  }
+];
+
+reducedFilter(data, ['id', 'name'], item => item.age > 24); // [{ id: 2, name: 'mike'}]
+```
+
+#### remove
+
+
+```
+const remove = (arr, func) =>
+  Array.isArray(arr)
+    ? arr.filter(func).reduce((acc, val) => {
+        arr.splice(arr.indexOf(val), 1);
+        return acc.concat(val);
+      }, [])
+    : [];
+```
+目的：从数组中移除让指定函数返回`false`的元素。
+
+
+```
+remove([1, 2, 3, 4], n => n % 2 == 0); // [2, 4]
+```
+
+#### sample
+
+
+```
+const sample = arr => arr[Math.floor(Math.random() * arr.length)];
+```
+
+目的：从数组返回一个随机元素。
+
+解析：获取一个[0,arr.length)的范围并向下取整，也就是[0,arr.length - 1]的范围。这刚好是数组的索引范围。于是就可以巧妙的获取随机元素。
+
+
+```
+sample([3, 7, 9, 11]); // 9
+```
+
+#### sampleSize
+
+
+```
+const sampleSize = ([...arr], n = 1) => {
+  let m = arr.length;
+  while (m) {
+    const i = Math.floor(Math.random() * m--);
+    [arr[m], arr[i]] = [arr[i], arr[m]];
+  }
+  return arr.slice(0, n);
+};
+```
+目的：从数组中获取指定个数的随机元素，最多返回与原数组数组相同大小的新数组。
+
+解析：使用 `Fisher-Yates` 算法将数组打乱顺序，简单的说就是每次将指定位和小于指定未的随机位置调换顺序。然后获取数组的前`n`项并返回。`n`默认为1。
+
+
+```
+sampleSize([1, 2, 3], 2); // [3,1]
+sampleSize([1, 2, 3], 4); // [2,3,1]
+```
+
+#### shuffle
+
+
+```
+const shuffle = ([...arr]) => {
+  let m = arr.length;
+  while (m) {
+    const i = Math.floor(Math.random() * m--);
+    [arr[m], arr[i]] = [arr[i], arr[m]];
+  }
+  return arr;
+};
+```
+目的：打乱数组排序。
+
+解析：与`sampleSize`很相似，只不过是直接返回新数组，而不是进行截取。
+
+
+```
+const foo = [1, 2, 3];
+shuffle(foo); // [2,3,1], foo = [1,2,3]
+```
+
+#### similarity
+
+
+```
+const similarity = (arr, values) => arr.filter(v => values.includes(v));
+```
+
+目的：返回由出现在两个数组中的元素组成的数组。
+
+解析：通过遍历`arr`过滤出`values`数组包括的元素。并返回新数组。
+
+
+```
+similarity([1, 2, 3], [1, 2, 4]); // [1,2]
+```
+
+#### sortedIndex
+
+
+```
+const sortedIndex = (arr, n) => {
+  const isDescending = arr[0] > arr[arr.length - 1];
+  const index = arr.findIndex(el => (isDescending ? n >= el : n <= el));
+  return index === -1 ? arr.length : index;
+};
+```
+目的：返回指定值应该插入到数组中的最低索引，以保持其按照顺序排序。
+
+解析：首先通过判断参数数组第一项与最后一项的大小来判断是否是降序(这就预示着数组传入的时候就需要按照某种顺序排序，否则判断就不准确)。然后通过`findIndex`来返回索引值，如果索引值为-1，那么就返回数组长度的这个索引(当前数组最后一位的下一位)。
+
+
+```
+sortedIndex([5, 3, 2, 1], 4); // 1
+sortedIndex([30, 50], 40); // 1
+```
+
+#### symmetricDifference
+
+
+```
+const symmetricDifference = (a, b) => {
+  const sA = new Set(a),
+    sB = new Set(b);
+  return [...a.filter(x => !sB.has(x)), ...b.filter(x => !sA.has(x))];
+};
+```
+目的：返回两个数组之间的对称差异。
+
+
+```
+symmetricDifference([1, 2, 3], [1, 2, 4]); // [3,4]
+```
+
+#### tail
+
+
+```
+const tail = arr => (arr.length > 1 ? arr.slice(1) : arr);
+```
+目的：返回数组除第一个元素之外的所有元素。
+
+解析：使用`slice(1)`来截取首项元素以后的所有元素。如果数组长度小于等于1，直接返回原数组。
+
+
+```
+tail([1, 2, 3]); // [2,3]
+tail([1]); // [1]
+```
+
+#### take
+
+
+```
+const take = (arr, n = 1) => arr.slice(0, n);
+```
+目的：获取从头开始的n个元素的数组。
+
+
+```
+take([1, 2, 3], 5); // [1, 2, 3]
+take([1, 2, 3], 0); // []
+```
+
+#### takeRight
+
+
+```
+const takeRight = (arr, n = 1) => arr.slice(arr.length - n, arr.length);
+```
+目的：获取从尾部开始的n个元素的数组。
+
+解析：还是使用`slice(arr.length - n, arr.length)`来截取数组。疑问：直接`slice(arr.length - n)`不也可以截取指定位置到末尾的数组吗？感觉不需要指定第二个参数。
+
+
+```
+takeRight([1, 2, 3], 2); // [ 2, 3 ]
+takeRight([1, 2, 3]); // [3]
+```
+
+#### union
+
+
+```
+const union = (a, b) => Array.from(new Set([...a, ...b]));
+```
+目的：返回由两个数组元素组成的并去重的新数组。
+
+解析：使用`Set`集合进行数组去重，然后通过`from()`将`Set`集合转为数组(因为`Set`集合有length属性)。
+
+
+```
+union([1, 2, 3], [4, 3, 2]); // [1,2,3,4]
+```
+
+#### without
+
+
+```
+const without = (arr, ...args) => arr.filter(v => !args.includes(v));
+```
+目的：过滤掉数组中指定的值。
+
+解析：遍历数组，判断每项是否包含在由剩余参数组成的数组中，过滤出由不包括的值组成的数组。
+
+
+```
+without([2, 1, 2, 3], 1, 2); // [3]
+```
+
+#### zip
+
+
+```
+const zip = (...arrays) => {
+  const maxLength = Math.max(...arrays.map(x => x.length));
+  return Array.from({ length: maxLength }).map((_, i) => {
+    return Array.from({ length: arrays.length }, (_, k) => arrays[k][i]);
+  });
+};
+```
+目的：创建一个二元数组，根据原始数组中的位置进行分组。
+
+
+```
+zip(['a', 'b'], [1, 2], [true, false]); // [['a', 1, true], ['b', 2, false]]
+zip(['a'], [1, 2], [true, false]); // [['a', 1, true], [undefined, 2, false]]
+```
+
+#### zipObject
+
+
+```
+const zipObject = (props, values) =>
+  props.reduce((obj, prop, index) => ((obj[prop] = values[index]), obj), {});
+```
+目的：给定一组有效的属性标识符和一组值，返回一个将属性关联到值的对象。
+
+解析：将第一个数组与第二个数组的每一项一一对应形成对象的键值对`obj[prop] = values[index]`，然后使用`reduce()`对每一项进行操作。
+
+
+```
+zipObject(['a', 'b', 'c'], [1, 2]); // {a: 1, b: 2, c: undefined}
+zipObject(['a', 'b'], [1, 2, 3]); // {a: 1, b: 2}
+```
+
+
+
+
+
 
 
