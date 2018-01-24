@@ -1,6 +1,6 @@
 ---
 layout:     post                   
-title:      30 seconds of code代码库方法解读 
+title:      30 seconds of code代码库方法解读(数组篇) 
 subtitle:   实现办法实在让人想不到
 date:       2018-01-12
 author:     chuck
