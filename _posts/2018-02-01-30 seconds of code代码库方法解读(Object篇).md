@@ -1,7 +1,7 @@
 ---
 layout:     post                   
 title:      30 seconds of code代码库方法解读(Object篇)
-subtitle:   实现办法实在让人想不到
+subtitle:   学习使用ES6实现的代码片段
 date:       2018-02-01
 author:     chuck
 header-img: img/home-bg-array.jpg
