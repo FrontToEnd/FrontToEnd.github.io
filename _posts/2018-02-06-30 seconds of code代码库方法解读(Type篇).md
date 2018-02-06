@@ -21,6 +21,7 @@ tags:
 const getType = v =>
   v === undefined ? 'undefined' : v === null ? 'null' : v.constructor.name.toLowerCase();
 ```
+
 目的：返回值的原生类型。
 
 解析：主要使用了获取值的构造函数名称的方法。如果值恒等于`undefined`或`null`，则返回其本身；否则返回值的构造函数名称字符串的小写。
