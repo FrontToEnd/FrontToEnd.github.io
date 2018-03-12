@@ -4,7 +4,7 @@ title:      30 seconds of code代码库方法解读(Brower和Date篇)
 subtitle:   学习使用ES6实现的代码片段
 date:       2018-01-24
 author:     chuck
-header-img: img/home-bg-array.jpg
+header-img: img/home-bg-code.jpg
 catalog: true                      
 tags:                               
     - JavaScript
