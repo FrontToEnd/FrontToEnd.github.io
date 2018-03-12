@@ -2,7 +2,7 @@
 layout:     post                   
 title:      危险的target="_blank"与"opener"
 subtitle:   跳转新页面需要知道的事情
-date:       2018-03-012
+date:       2018-03-12
 author:     chuck
 header-img: img/home-bg-link.jpg
 catalog: true                      
