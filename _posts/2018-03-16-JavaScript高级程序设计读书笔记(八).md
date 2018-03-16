@@ -1,6 +1,6 @@
 ---
 layout:     post                   
-title:      JavaScript高级程序设计读书笔记(七)         
+title:      JavaScript高级程序设计读书笔记(八)         
 subtitle:   重温红皮书精髓--面向对象的程序设计
 date:       2018-03-16
 author:     chuck
