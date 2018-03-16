@@ -6,8 +6,6 @@
 > 
 ### [我的博客在这里 &rarr;](https://qukun.com.cn)
 
-![](https://raw.githubusercontent.com/qiubaiying/qiubaiying.github.io/master/img/readme-home.png)
-
 
 ## 使用
 
