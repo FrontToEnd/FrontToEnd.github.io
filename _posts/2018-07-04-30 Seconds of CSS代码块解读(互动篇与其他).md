@@ -156,7 +156,7 @@ span {
 
 ### Counter(计数器)
 
-实际上，计数器是由CSS维护的变量，其值可以通过CSS规则递增以跟踪它们被使用的次数。这个属性目前还没用过，也是头一次见。说明也是按照原本的英文说明进行照搬，如果还不懂，可以查看[MDN的解释](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Counter_Styles)。
+实际上，计数器是由CSS维护的变量，其值可以通过CSS规则递增以跟踪它们被使用的次数。这个属性目前还没用过，也是头一次见。说明也是按照原本的英文说明进行照搬，如果还不懂，可以查看[MDN的解释](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Counter_Styles)。具体的解释也可以参考张鑫旭大神的书《CSS世界》P.65 6.深入理解 content 计数器。
 
 ```
 <ul>
